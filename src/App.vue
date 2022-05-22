@@ -1,27 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <section class="section">
+    <div class="list">
+      <h2>To do</h2>
+      <tasks-list :list="toDoList" />
+    </div>
+    <div class="list">
+      <h2>Done</h2>
+      <tasks-list :list="doneList" />
+    </div>
+    <adding-form />
+  </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import tasksList from "./components/tasksList.vue";
+import addingForm from "./components/addingForm.vue";
+import { mapGetters } from "vuex";
 
-export default defineComponent({
-  name: 'App',
+export default {
   components: {
-    HelloWorld
-  }
-});
+    tasksList,
+    addingForm,
+  },
+  computed: mapGetters(["toDoList", "doneList"]),
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.section {
+  display: flex;
+  gap: 50px;
+}
+
+.list {
+  width: 300px;
 }
 </style>
